@@ -103,7 +103,12 @@
 		</dependency>
 
 		<!-- json数据 -->
-
+		<dependency>  
+		    <groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-mapper-asl</artifactId>  
+		    <version>1.9.4</version>  
+		</dependency>  
+		
 		<!-- 日志文件管理包 -->
 		<!-- log start -->
 		<dependency>  

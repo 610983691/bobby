@@ -5,7 +5,7 @@
 <!--这里的namespace就是指的你要实现的dao层接口的类路径 -->
 <mapper namespace="com.bobby.dao.ExampleDAO">
 
-	<select id="select" resultType="com.bobby.dao.ExampleDTO">
+	<select id="select" resultType="com.bobby.dto.ExampleDTO">
 		select * from users
 	</select>
 
