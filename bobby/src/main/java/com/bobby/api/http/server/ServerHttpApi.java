@@ -11,35 +11,16 @@ import com.bobby.dto.ExampleDTO;
 
 /**
  * 
- * 
- * <p>
- * 项目名称：bobby
- * <p>
- * 类名称：ServerHttpApi
- * <p>
- * 类描述：
- * <p>
- * 创建人：tongjie
- * <p>
- * 创建时间：2017年12月5日 下午2:14:06
- * <p>
- * 修改人：tongjie
- * <p>
- * 修改时间：2017年12月5日 下午2:14:06
- * <p>
- * 修改备注：
+ * 描述:
  * 
  * @author tongjie
- * @version
- *
+ * @date 2017年12月6日 上午10:19:43
  */
-
 @Controller
 @RequestMapping(value = "api")
 public class ServerHttpApi {
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(ServerHttpApi.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ServerHttpApi.class);
 
 	@RequestMapping(value = "reportLocation")
 	@ResponseBody

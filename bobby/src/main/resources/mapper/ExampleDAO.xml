@@ -6,10 +6,10 @@
 <mapper namespace="com.bobby.dao.ExampleDAO">
 
 	<select id="select" resultType="com.bobby.dto.ExampleDTO">
-		select * from users
+		select * from test_user
 	</select>
 
-	<insert id="insert">
-		insert into test_table values(16,'tongjie','123','cq',0)
+	<insert id="insert" parameterType="com.bobby.dto.ExampleDTO">
+		insert into test_user values(#{id},#{username},#{password})
 	</insert>
 </mapper>

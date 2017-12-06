@@ -1,5 +1,7 @@
 package com.bobby.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +28,10 @@ public class ExampleServiceImpl implements ExampleService {
 	}
 
 	public void exampleAdd(ExampleDTO exampleDTO) {
-		exampleDao.select(exampleDTO);
+		exampleDTO.setId(UUID.randomUUID().toString());
+		exampleDTO.setUsername("tongjie");
+		exampleDTO.setPassword("tongjie");
+		exampleDao.insert(exampleDTO);
 
 	}
 

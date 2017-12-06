@@ -10,15 +10,8 @@ package com.bobby.dto;
 public class ExampleDTO {
 
 	private String id;
-	private String name;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private String username;
+	private String password;
 
 	public String getId() {
 		return id;
@@ -30,6 +23,22 @@ public class ExampleDTO {
 
 	@Override
 	public String toString() {
-		return "id=" + this.id + ",name=" + this.name;
+		return "id=" + this.id + ",name=" + this.username;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

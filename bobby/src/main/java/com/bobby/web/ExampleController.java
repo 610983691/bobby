@@ -31,7 +31,7 @@ public class ExampleController {
 	@RequestMapping("example")
 	public String example() {
 		logger.info("invoke this");
-		exampleService.exampleAdd(new ExampleDTO());
+		exampleService.exampleSearch(new ExampleDTO());
 		return "welcom";
 	}
 
