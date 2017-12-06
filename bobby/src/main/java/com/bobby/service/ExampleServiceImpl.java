@@ -7,7 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bobby.dao.ExampleDAO;
 import com.bobby.dto.ExampleDTO;
 
-@Transactional
+/**
+ * 
+ * 描述:
+ * 
+ * @author tongjie
+ * @date 2017年12月6日 上午9:42:16
+ */
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class ExampleServiceImpl implements ExampleService {
 

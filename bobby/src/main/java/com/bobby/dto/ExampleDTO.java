@@ -1,19 +1,35 @@
 package com.bobby.dto;
 
+/**
+ * 
+ * 描述:
+ * 
+ * @author tongjie
+ * @date 2017年12月6日 上午9:41:48
+ */
 public class ExampleDTO {
 
-	private String ID;
+	private String id;
 	private String name;
-	public String getID() {
-		return ID;
-	}
-	public void setID(String iD) {
-		ID = iD;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + this.id + ",name=" + this.name;
 	}
 }

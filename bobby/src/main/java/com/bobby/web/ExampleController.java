@@ -11,12 +11,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bobby.dto.ExampleDTO;
 import com.bobby.service.ExampleService;
 
+/**
+ * 
+ * 项目名称：bobby 类名称：ExampleController 描述：
+ * 
+ * @author tongjie
+ * @date 2017年12月6日 上午9:40:10
+ */
 @Controller
 @RequestMapping(value = "example")
 public class ExampleController {
 
-	private static final Logger logger = Logger
-			.getLogger(ExampleController.class);
+	private static final Logger logger = Logger.getLogger(ExampleController.class);
 
 	@Autowired
 	private ExampleService exampleService;
@@ -28,9 +34,11 @@ public class ExampleController {
 		exampleService.exampleAdd(new ExampleDTO());
 		return "welcom";
 	}
+
 	@RequestMapping("welcome")
 	public String welcom() {
 		logger.info("invoke welcome");
+		exampleService.exampleAdd(new ExampleDTO());
 		return "index";
 	}
 
