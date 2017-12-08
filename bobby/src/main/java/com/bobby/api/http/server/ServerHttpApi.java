@@ -2,12 +2,14 @@ package com.bobby.api.http.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONArray;
-import com.bobby.dto.ExampleDTO;
+import com.alibaba.fastjson.JSONObject;
+import com.bobby.service.location.LocationService;
 
 /**
  * 
@@ -22,11 +24,16 @@ public class ServerHttpApi {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ServerHttpApi.class);
 
-	@RequestMapping(value = "reportLocation")
+	@Autowired
+	private LocationService locationService;
+
+	@RequestMapping(value = "reportLocation", headers = "application/json")
 	@ResponseBody
-	public String reportLocation() {
-		LOG.info("请求report接口");
-		return JSONArray.toJSONString(new ExampleDTO());
+	public String reportLocation(@RequestParam JSONObject json) {
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("请求report接口，请求参数：\n" + json);
+		}
+		return locationService.saveUserLocation(json);
 	}
 
 }

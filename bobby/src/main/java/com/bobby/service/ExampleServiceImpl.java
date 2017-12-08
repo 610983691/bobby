@@ -23,10 +23,12 @@ public class ExampleServiceImpl implements ExampleService {
 	@Autowired
 	private ExampleDAO exampleDao;
 
+	@Override
 	public void exampleSearch(ExampleDTO exampleDTO) {
 		exampleDao.select(exampleDTO);
 	}
 
+	@Override
 	public void exampleAdd(ExampleDTO exampleDTO) {
 		exampleDTO.setId(UUID.randomUUID().toString());
 		exampleDTO.setUsername("tongjie");
@@ -35,10 +37,12 @@ public class ExampleServiceImpl implements ExampleService {
 
 	}
 
+	@Override
 	public void exampleModify(ExampleDTO exampleDTO) {
-
+		return;
 	}
 
+	@Override
 	public void exampleDelete(ExampleDTO exampleDTO) {
 
 	}
