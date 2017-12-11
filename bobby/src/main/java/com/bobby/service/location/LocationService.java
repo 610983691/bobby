@@ -14,10 +14,11 @@ import com.alibaba.fastjson.JSONObject;
 public interface LocationService {
 
 	/**
-	 * 保存用户的位置信息
+	 * 保存位置信息
 	 * 
-	 * @param location
-	 * @return void
+	 * @param json
+	 * @return
+	 * @return String
 	 */
 	String saveUserLocation(JSONObject json);
 

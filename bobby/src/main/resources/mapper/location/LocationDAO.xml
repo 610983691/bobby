@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--这里的namespace就是指的你要实现的dao层接口的类路径 -->
+<mapper namespace="com.bobby.dao.location.LocationDAO">
+
+	<select id="select" resultType="com.bobby.dto.common.LocationDTO">
+		select * from test_user
+	</select>
+
+	<insert id="saveLocation" parameterType="com.bobby.dto.common.LocationDTO">
+		insert into test_user values(#{id},#{username},#{password})
+	</insert>
+</mapper>

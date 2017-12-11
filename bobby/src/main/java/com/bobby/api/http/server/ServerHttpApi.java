@@ -4,8 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -27,9 +28,9 @@ public class ServerHttpApi {
 	@Autowired
 	private LocationService locationService;
 
-	@RequestMapping(value = "reportLocation", headers = "application/json")
+	@RequestMapping(value = "reportLocation", headers = "application/json", method = RequestMethod.POST)
 	@ResponseBody
-	public String reportLocation(@RequestParam JSONObject json) {
+	public String reportLocation(@RequestBody JSONObject json) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("请求report接口，请求参数：\n" + json);
 		}
