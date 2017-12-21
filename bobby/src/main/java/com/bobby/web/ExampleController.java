@@ -27,14 +27,16 @@ public class ExampleController {
 	@Autowired
 	private ExampleService exampleService;
 
+	// 以下方式，路径只能/example/example/,以/结尾
 	@ResponseBody
-	@RequestMapping("example")
+	@RequestMapping("example/")
 	public String example() {
 		logger.info("invoke this");
 		exampleService.exampleSearch(new ExampleDTO());
 		return "welcom";
 	}
 
+	// 以下方式，路径可以是/example/welcome,/example/welcome.*,/example/welcome/都能请求到这个方法
 	@RequestMapping("welcome")
 	public String welcom() {
 		logger.info("invoke welcome");
