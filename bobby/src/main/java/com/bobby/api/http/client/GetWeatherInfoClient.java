@@ -1,9 +1,7 @@
 package com.bobby.api.http.client;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.security.SignatureException;
-import java.util.Date;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -26,10 +24,10 @@ import org.apache.log4j.Logger;
 public class GetWeatherInfoClient {
 
 	private final static Logger LOG = Logger.getLogger(GetWeatherInfoClient.class);
-	// 查询当前天气情况：气温，天气
+	/** 查询当前天气情况：气温，天气 */
 	private final static String TIANQI_NOW_WEATHER_URL = "https://api.seniverse.com/v3/weather/now.json";
 
-	// 查询当前生活指数：穿衣，洗车等
+	/** 查询当前生活指数：穿衣，洗车等 */
 	private final static String TIQNQI_NOW_SUGGESTION = "https://api.seniverse.com/v3/life/suggestion.json";
 
 	/**
@@ -37,12 +35,13 @@ public class GetWeatherInfoClient {
 	 */
 	private final static String TIANQI_DAILY_5 = "https://api.seniverse.com/v3/weather/daily.json";
 
-	private final static String TIANQI_API_SECRET_KEY = "eki6heotxtx5tss8"; //
+	private final static String TIANQI_API_SECRET_KEY = "eki6heotxtx5tss8";
 
-	private final static String TIANQI_API_USER_ID = "U960C4B582"; //
+	private final static String TIANQI_API_USER_ID = "U960C4B582";
 
 	/**
 	 * Generate HmacSHA1 signature with given data string and key
+	 * 这些都是为了加密key，做认证
 	 * 
 	 * @param data
 	 * @param key
@@ -78,11 +77,7 @@ public class GetWeatherInfoClient {
 	 */
 	private static String generateGetDiaryWeatherURL(String location, String start, String days) {
 		try {
-			String timestamp = String.valueOf(new Date().getTime());
-			String params = "ts=" + timestamp + "&ttl=30&uid=" + TIANQI_API_USER_ID;
-			String signature = URLEncoder.encode(generateSignature(params, TIANQI_API_SECRET_KEY), "UTF-8");
-			return TIANQI_DAILY_5 + "?" + params + "&sig=" + signature + "&location=" + location + "&start=" + start
-					+ "&days=" + days;
+			return TIANQI_DAILY_5 + "?key=eki6heotxtx5tss8&location=" + location + "&start=" + start + "&days=" + days;
 		} catch (Exception e) {
 			LOG.error("获取请求URL异常", e);
 		}
@@ -97,10 +92,7 @@ public class GetWeatherInfoClient {
 	 */
 	private static String generateGetNowWeatherURL(String location) {
 		try {
-			String timestamp = String.valueOf(new Date().getTime());
-			String params = "ts=" + timestamp + "&ttl=30&uid=" + TIANQI_API_USER_ID;
-			String signature = URLEncoder.encode(generateSignature(params, TIANQI_API_SECRET_KEY), "UTF-8");
-			return TIANQI_NOW_WEATHER_URL + "?" + params + "&sig=" + signature + "&location=" + location;
+			return TIANQI_NOW_WEATHER_URL + "?key=eki6heotxtx5tss8&&location=" + location;
 		} catch (Exception e) {
 			LOG.error("获取请求URL异常", e);
 		}
@@ -115,10 +107,7 @@ public class GetWeatherInfoClient {
 	 */
 	private static String generateGetSuggestionURL(String location) {
 		try {
-			String timestamp = String.valueOf(new Date().getTime());
-			String params = "ts=" + timestamp + "&ttl=30&uid=" + TIANQI_API_USER_ID;
-			String signature = URLEncoder.encode(generateSignature(params, TIANQI_API_SECRET_KEY), "UTF-8");
-			return TIQNQI_NOW_SUGGESTION + "?" + params + "&sig=" + signature + "&location=" + location;
+			return TIQNQI_NOW_SUGGESTION + "?key=eki6heotxtx5tss8&location=" + location;
 		} catch (Exception e) {
 			LOG.error("获取请求URL异常", e);
 		}
@@ -164,7 +153,7 @@ public class GetWeatherInfoClient {
 
 	public static void main(String args[]) {
 		try {
-			getWeatherSuggestion("chengdu");
+			getDailyWeathers("chengdu", "0", "5");
 		} catch (Exception e) {
 			System.out.println("Exception:" + e);
 		}
@@ -195,7 +184,6 @@ public class GetWeatherInfoClient {
 				if (LOG.isDebugEnabled()) {
 					LOG.debug("Response for request uri:" + httpget.getURI());
 					LOG.debug("Response status:" + response.getStatusLine());
-					LOG.debug("Response content length:" + entity.getContentLength());
 					LOG.debug("Response content:" + result);
 				}
 			} finally {

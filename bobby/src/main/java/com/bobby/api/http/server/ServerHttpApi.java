@@ -28,7 +28,7 @@ public class ServerHttpApi {
 	@Autowired
 	private LocationService locationService;
 
-	@RequestMapping(value = "reportLocation", headers = "application/json", method = RequestMethod.POST)
+	@RequestMapping(value = "reportLocation/", headers = "application/json", method = RequestMethod.POST)
 	@ResponseBody
 	public String reportLocation(@RequestBody JSONObject json) {
 		if (LOG.isDebugEnabled()) {

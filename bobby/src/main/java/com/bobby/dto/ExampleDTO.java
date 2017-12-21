@@ -12,6 +12,7 @@ public class ExampleDTO {
 	private String id;
 	private String username;
 	private String password;
+	private String address;
 
 	public String getId() {
 		return id;
@@ -40,5 +41,13 @@ public class ExampleDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
