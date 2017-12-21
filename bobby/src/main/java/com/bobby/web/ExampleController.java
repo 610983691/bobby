@@ -75,7 +75,7 @@ public class ExampleController {
 
 	// 以下方式，路径可以是/example/welcome,/example/welcome.*,/example/welcome/都能请求到这个方法
 	@ResponseBody
-	@RequestMapping(value = "example/", method = RequestMethod.POST)
+	@RequestMapping(value = "welcome/", method = RequestMethod.POST)
 	public String welcom() {
 		logger.info("invoke welcome");
 		exampleService.exampleAdd(new ExampleDTO());
