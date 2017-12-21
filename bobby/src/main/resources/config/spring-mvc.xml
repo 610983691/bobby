@@ -30,8 +30,9 @@
       p:prefix="/jsp/" p:suffix=".jsp"/>
       
          
-    <!--对静态资源文件的访问 -->
-   	<mvc:resources location="/resources/" mapping="/resources/**" />
-	<mvc:resources location="/errorpage/" mapping="/errorpage/**" />
-	<mvc:resources location="/jsp/" mapping="/jsp/**" /> 
+    <!--对静态资源文件的访问 ，下边resource方式会导致 正常的Controller请求获取不到-->
+    <mvc:default-servlet-handler />
+<!--    	<mvc:resources location="/resources/" mapping="/resources/**" /> -->
+<!-- 	<mvc:resources location="/errorpage/" mapping="/errorpage/**" /> -->
+<!-- 	<mvc:resources location="/jsp/" mapping="/jsp/**" />  -->
 </beans>
