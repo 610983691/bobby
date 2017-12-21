@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.dao.location.LocationDAO;
 import com.bobby.dto.common.CommonResDTO;
 import com.bobby.dto.common.LocationDTO;
+import com.bobby.dto.common.UserDTO;
 import com.bobby.exception.InvalidParamException;
 import com.bobby.exception.ServiceException;
 
@@ -60,6 +62,19 @@ public class LocationServiceImpl implements LocationService {
 			throw new ServiceException("异常" + e.getMessage());
 		}
 		return null;
+	}
+
+	public static void main(String[] a) {
+		LocationDTO local = new LocationDTO();
+		local.setAccuracy("1");
+		UserDTO user = new UserDTO();
+		user.setPassword("123");
+		user.setUserid("2");
+		local.setUser(user);
+		String s = JSONObject.toJSONString(local);
+		System.out.println(s);
+		LocationDTO la = JSONObject.toJavaObject(JSON.parseObject(s), LocationDTO.class);
+		System.out.println(la.getUser());
 	}
 
 	private boolean isValidLocation(JSONObject json) {

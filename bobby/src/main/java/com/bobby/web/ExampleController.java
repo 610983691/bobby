@@ -28,7 +28,7 @@ public class ExampleController {
 	private ExampleService exampleService;
 
 	@ResponseBody
-	@RequestMapping("example")
+	@RequestMapping(value = "/example", method = RequestMethod.GET)
 	public String example() {
 		logger.info("invoke this");
 		exampleService.exampleSearch(new ExampleDTO());

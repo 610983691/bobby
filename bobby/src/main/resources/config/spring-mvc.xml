@@ -12,7 +12,7 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
     
-    <!-- 扫描controller（controller层注入） -->
+   <!-- 扫描controller（controller层注入） -->
    <context:component-scan base-package="com.bobby.web"/>
    <context:component-scan base-package="com.bobby.api"/>
    <context:component-scan base-package="com.bobby.service"/>
@@ -33,5 +33,5 @@
     <!--对静态资源文件的访问 -->
    	<mvc:resources location="/resources/" mapping="/resources/**" />
 	<mvc:resources location="/errorpage/" mapping="/errorpage/**" />
-	<mvc:resources location="/jsp/" mapping="/jsp/**" /> 
+	<mvc:resources location="/jsp/" mapping="/jsp/**" />
 </beans>

@@ -17,8 +17,6 @@
 
     <!-- Custom Fonts -->
     <link href="./resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <!-- Theme CSS -->
     <link href="./resources/css/grayscale.min.css" rel="stylesheet">
@@ -54,7 +52,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                    	
+                    	<form action="" method="post">
+							用户名:<input id="user" type="text" name="username">
+							密码:<input id="pwd" type="password" name="password">
+							<input id="btn" type="button" value="登录">
+						</form>
                     </div>
                 </div>
             </div>
@@ -85,5 +87,25 @@
     <script src="./resources/js/grayscale.min.js"></script>
 
 </body>
-
+<script>
+$(function(){
+	
+	$("#btn").click(function(){
+		var param = {
+				userename:$("#user").val(),
+				password:$("#pwd").val()
+		}
+		$.ajax({
+	        type: "POST",
+	        url: "example/welcome",
+	        contentType: "application/json;UTF-8",
+	        dataType: "json",
+	        data: JSON.stringify(param),
+	        success: function (response) {
+	            console.log(response)
+	        }
+	    });
+	})
+})
+</script>
 </html>
