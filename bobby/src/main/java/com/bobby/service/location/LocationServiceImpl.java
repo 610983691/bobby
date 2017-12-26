@@ -14,7 +14,6 @@ import com.bobby.dao.location.LocationDAO;
 import com.bobby.dto.common.CommonResDTO;
 import com.bobby.dto.common.LocationDTO;
 import com.bobby.exception.InvalidParamException;
-import com.bobby.exception.ServiceException;
 
 /**
  * 描述:
@@ -54,10 +53,10 @@ public class LocationServiceImpl implements LocationService {
 			locationDao.saveLocation(JSONObject.toJavaObject(json, LocationDTO.class));
 		} catch (InvalidParamException ie) {
 			LOG.error("invalid location info:", ie);
-			throw new InvalidParamException("异常" + ie.getMessage());
+			return CommonResDTO.getFailureRes().buildMsg(ie.getErrMsg()).toString();
 		} catch (Exception e) {
 			LOG.error("save user location err", e);
-			throw new ServiceException("异常" + e.getMessage());
+			return CommonResDTO.getFailureRes().buildMsg(e.getMessage()).toString();
 		}
 		return null;
 	}

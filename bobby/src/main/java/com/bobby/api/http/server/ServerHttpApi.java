@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.service.location.LocationService;
+import com.bobby.service.weather.WeatherService;
 
 /**
  * 
@@ -26,13 +27,25 @@ public class ServerHttpApi {
 	private static final Logger LOG = LoggerFactory.getLogger(ServerHttpApi.class);
 
 	@Autowired
+	private WeatherService weatherService;
+
+	@Autowired
 	private LocationService locationService;
 
-	@RequestMapping(value = "reportLocation/", headers = "application/json", method = RequestMethod.POST)
+	@RequestMapping(value = "weathers/", headers = "application/json", method = RequestMethod.POST)
 	@ResponseBody
-	public String reportLocation(@RequestBody JSONObject json) {
+	public String getWeatherNow(@RequestBody JSONObject json) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("请求report接口，请求参数：\n" + json);
+			LOG.debug("请求weathers接口，请求参数：\n" + json);
+		}
+		return weatherService.getWeather(json);
+	}
+
+	@RequestMapping(value = "weatherDaily/", headers = "application/json", method = RequestMethod.POST)
+	@ResponseBody
+	public String getWeatherDaily(@RequestBody JSONObject json) {
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("获取最近3天的天气，请求参数：\n" + json);
 		}
 		return locationService.saveUserLocation(json);
 	}
