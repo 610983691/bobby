@@ -26,7 +26,7 @@ public class WeatherNowDTO {
 		return results;
 	}
 
-	class Location {
+	static class Location {
 
 		private String id;
 		private String name;
@@ -86,7 +86,7 @@ public class WeatherNowDTO {
 
 	}
 
-	class Now {
+	static class Now {
 
 		private String text;
 		private String code;
@@ -118,7 +118,7 @@ public class WeatherNowDTO {
 
 	}
 
-	class Results {
+	static class Results {
 
 		private Location location;
 		private Now now;

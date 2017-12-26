@@ -32,11 +32,11 @@ public class ServerHttpApi {
 	@Autowired
 	private LocationService locationService;
 
-	@RequestMapping(value = "weathers/", headers = "application/json", method = RequestMethod.POST)
+	@RequestMapping(value = "weathers/", headers = { "content-type=application/json" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String getWeatherNow(@RequestBody JSONObject json) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("请求weathers接口，请求参数：\n" + json);
+			LOG.debug("请求weathers接口，请求参数：\n" + json.toJSONString());
 		}
 		return weatherService.getWeather(json);
 	}

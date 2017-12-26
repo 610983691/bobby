@@ -15,7 +15,6 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class LocationDTO {
 
-	private UserDTO user;
 	/** 维度 */
 	private Float latitude;
 
@@ -94,14 +93,6 @@ public class LocationDTO {
 
 	public void setHorizontalAccuracy(String horizontalAccuracy) {
 		this.horizontalAccuracy = horizontalAccuracy;
-	}
-
-	public UserDTO getUser() {
-		return user;
-	}
-
-	public void setUser(UserDTO user) {
-		this.user = user;
 	}
 
 	@Override

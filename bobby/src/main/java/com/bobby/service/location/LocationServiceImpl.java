@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.dao.location.LocationDAO;
 import com.bobby.dto.common.CommonResDTO;
@@ -68,9 +67,6 @@ public class LocationServiceImpl implements LocationService {
 				return false;
 			}
 			if (location.getLongitude() > MAX_LONGITUDE || location.getLongitude() < -MAX_LONGITUDE) {
-				return false;
-			}
-			if (StringUtils.isEmpty(location.getUser().getUsername())) {
 				return false;
 			}
 		} catch (Exception e) {

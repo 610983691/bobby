@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.api.http.client.GetWeatherInfoClient;
-import com.bobby.dto.common.LocationDTO;
-import com.bobby.dto.weather.WeatherNowDTO;
+import com.bobby.dto.common.ReportDataDTO;
 
 /**
  * 描述:
@@ -31,12 +30,10 @@ public class WeatherServiceImpl implements WeatherService {
 	 */
 	@Override
 	public String getWeather(JSONObject location) {
-		LocationDTO locationDto = JSONObject.toJavaObject(location, LocationDTO.class);
-		String locationInfo = locationDto.getLatitude() + ":" + locationDto.getLongitude();
-		WeatherNowDTO weather = JSONObject.parseObject(GetWeatherInfoClient.getNowWeather(locationInfo),
-				WeatherNowDTO.class);
+		ReportDataDTO data = JSONObject.toJavaObject(location, ReportDataDTO.class);
+		String locationInfo = data.getLocation().getLatitude() + ":" + data.getLocation().getLongitude();
 
-		return weather.toString();
+		return GetWeatherInfoClient.getNowWeather(locationInfo);
 	}
 
 }
