@@ -39,6 +39,10 @@ public class GetWeatherInfoClient {
 
 	private final static String TIANQI_API_USER_ID = "U960C4B582";
 
+	private final static String TODAY = "0";
+
+	private final static String THREE_DAYS = "3";
+
 	/**
 	 * Generate HmacSHA1 signature with given data string and key
 	 * 这些都是为了加密key，做认证
@@ -115,7 +119,7 @@ public class GetWeatherInfoClient {
 	}
 
 	/**
-	 * 获取最近几天的天气，最多支持5天，从今天开始
+	 * 获取最近几天的天气，最多支持3天，从今天开始
 	 * 
 	 * @param location
 	 *            支持城市名，拼音，ip,经纬度,详情见心知天气API
@@ -125,6 +129,17 @@ public class GetWeatherInfoClient {
 	 */
 	public static String getDailyWeathers(String location, String start, String days) {
 		return httpGet(generateGetDiaryWeatherURL(location, start, days));
+	}
+
+	/**
+	 * 获取今天、明天、后天的天气
+	 * 
+	 * @param location
+	 *            支持城市名，拼音，ip,经纬度,详情见心知天气API
+	 * @return 请求响应的json报文或者null
+	 */
+	public static String getDefaultDailyWeathers(String location) {
+		return httpGet(generateGetDiaryWeatherURL(location, TODAY, THREE_DAYS));
 	}
 
 	/**

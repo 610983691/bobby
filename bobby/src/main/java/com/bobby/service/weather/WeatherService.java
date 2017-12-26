@@ -15,4 +15,6 @@ public interface WeatherService {
 
 	String getWeather(JSONObject location);
 
+	String getWeatherDaily(JSONObject location);
+
 }

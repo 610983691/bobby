@@ -41,13 +41,13 @@ public class ServerHttpApi {
 		return weatherService.getWeather(json);
 	}
 
-	@RequestMapping(value = "weatherDaily/", headers = "application/json", method = RequestMethod.POST)
+	@RequestMapping(value = "weatherDaily/", headers = { "content-type=application/json" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String getWeatherDaily(@RequestBody JSONObject json) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("获取最近3天的天气，请求参数：\n" + json);
 		}
-		return locationService.saveUserLocation(json);
+		return weatherService.getWeatherDaily(json);
 	}
 
 }
