@@ -3,8 +3,6 @@
  */
 package com.bobby.dto.common;
 
-import java.util.Date;
-
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -15,14 +13,17 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class LocationDTO {
 
+	private String id;
+
+	private String nickName;
 	/** 维度 */
 	private Float latitude;
 
 	/** 经度 */
-	private Float longitude;
+	private String longitude;
 
 	/** 速度，单位m/s */
-	private Float speed;
+	private String speed;
 
 	/** 位置的精确度 */
 	private String accuracy;
@@ -37,7 +38,7 @@ public class LocationDTO {
 	private String horizontalAccuracy;
 
 	/** 上报时间 */
-	private Date reportTime;
+	private Long reportTime;
 
 	public Float getLatitude() {
 		return latitude;
@@ -47,19 +48,19 @@ public class LocationDTO {
 		this.latitude = latitude;
 	}
 
-	public Float getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Float longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	public Float getSpeed() {
+	public String getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(Float speed) {
+	public void setSpeed(String speed) {
 		this.speed = speed;
 	}
 
@@ -100,11 +101,27 @@ public class LocationDTO {
 		return JSONObject.toJSONString(this);
 	}
 
-	public Date getReportTime() {
+	public Long getReportTime() {
 		return reportTime;
 	}
 
-	public void setReportTime(Date reportTime) {
+	public void setReportTime(Long reportTime) {
 		this.reportTime = reportTime;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

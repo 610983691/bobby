@@ -14,11 +14,9 @@ import com.bobby.dto.common.LocationDTO;
 public interface LocationDAO {
 
 	/**
-	 * 保存位置信息，返回插入的主键ID
 	 * 
 	 * @param location
 	 * @return
-	 * @return String
 	 */
-	public String saveLocation(LocationDTO location);
+	public void saveLocation(LocationDTO location);
 }

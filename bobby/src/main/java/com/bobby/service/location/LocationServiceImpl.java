@@ -3,15 +3,20 @@
  */
 package com.bobby.service.location;
 
+import java.util.Calendar;
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.dao.location.LocationDAO;
 import com.bobby.dto.common.CommonResDTO;
 import com.bobby.dto.common.LocationDTO;
+import com.bobby.dto.common.ReportDataDTO;
 import com.bobby.exception.InvalidParamException;
 
 /**
@@ -49,24 +54,33 @@ public class LocationServiceImpl implements LocationService {
 			if (!isValidLocation(json)) {
 				return CommonResDTO.getFailureRes().buildMsg("参数错误").toString();
 			}
-			locationDao.saveLocation(JSONObject.toJavaObject(json, LocationDTO.class));
+			ReportDataDTO reportData = JSONObject.toJavaObject(json, ReportDataDTO.class);
+			LocationDTO location = reportData.getLocation();
+			location.setId(UUID.randomUUID().toString());
+			location.setReportTime(Calendar.getInstance().getTimeInMillis());
+			location.setNickName(reportData.getUserInfo().getNickName());
+			locationDao.saveLocation(location);
 		} catch (InvalidParamException ie) {
 			LOG.error("invalid location info:", ie);
-			return CommonResDTO.getFailureRes().buildMsg(ie.getErrMsg()).toString();
+			throw ie;
 		} catch (Exception e) {
 			LOG.error("save user location err", e);
-			return CommonResDTO.getFailureRes().buildMsg(e.getMessage()).toString();
+			throw new RuntimeException(e.getMessage());
 		}
 		return null;
 	}
 
 	private boolean isValidLocation(JSONObject json) {
 		try {
-			LocationDTO location = JSONObject.toJavaObject(json, LocationDTO.class);
-			if (location.getLatitude() > MAX_LATITUDE || location.getLatitude() < -MAX_LATITUDE) {
+			ReportDataDTO data = JSONObject.toJavaObject(json, ReportDataDTO.class);
+			if (data.getLocation().getLatitude() > MAX_LATITUDE || data.getLocation().getLatitude() < -MAX_LATITUDE) {
 				return false;
 			}
-			if (location.getLongitude() > MAX_LONGITUDE || location.getLongitude() < -MAX_LONGITUDE) {
+			if (Float.valueOf(data.getLocation().getLongitude()) > MAX_LONGITUDE
+					|| Float.valueOf(data.getLocation().getLongitude()) < -MAX_LONGITUDE) {
+				return false;
+			}
+			if (StringUtils.isEmpty(data.getUserInfo().getNickName())) {
 				return false;
 			}
 		} catch (Exception e) {

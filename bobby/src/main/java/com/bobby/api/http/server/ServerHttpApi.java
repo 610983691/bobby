@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.bobby.service.location.LocationService;
 import com.bobby.service.weather.WeatherService;
+import com.bobby.utils.threadpool.SaveLocationThreadPoolUtil;
 
 /**
  * 
@@ -35,9 +36,12 @@ public class ServerHttpApi {
 	@RequestMapping(value = "weathers/", headers = { "content-type=application/json" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String getWeatherNow(@RequestBody JSONObject json) {
+		/** 1.这一步是异步的保存位置信息 */
+		SaveLocationThreadPoolUtil.saveLocation(locationService, json);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("请求weathers接口，请求参数：\n" + json.toJSONString());
 		}
+		/** 2.获取实时天气信息 */
 		return weatherService.getWeather(json);
 	}
 
@@ -47,6 +51,8 @@ public class ServerHttpApi {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("获取最近3天的天气，请求参数：\n" + json);
 		}
+		/** 1.这一步是异步的保存位置信息 */
+		SaveLocationThreadPoolUtil.saveLocation(locationService, json);
 		return weatherService.getWeatherDaily(json);
 	}
 
