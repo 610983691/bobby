@@ -3,7 +3,9 @@
  */
 package com.bobby.service.location;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -57,8 +59,10 @@ public class LocationServiceImpl implements LocationService {
 			ReportDataDTO reportData = JSONObject.toJavaObject(json, ReportDataDTO.class);
 			LocationDTO location = reportData.getLocation();
 			location.setId(UUID.randomUUID().toString());
-			location.setReportTime(Calendar.getInstance().getTimeInMillis());
+			Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+			location.setReportTime(now.getTime());
 			location.setNickName(reportData.getUserInfo().getNickName());
+			location.setReportDateTime(now);
 			locationDao.saveLocation(location);
 		} catch (InvalidParamException ie) {
 			LOG.error("invalid location info:", ie);

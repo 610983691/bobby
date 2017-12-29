@@ -3,6 +3,8 @@
  */
 package com.bobby.dto.common;
 
+import java.util.Date;
+
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -39,6 +41,9 @@ public class LocationDTO {
 
 	/** 上报时间 */
 	private Long reportTime;
+
+	/** 上报时间，日期格式 */
+	private Date reportDateTime;
 
 	public Float getLatitude() {
 		return latitude;
@@ -123,5 +128,13 @@ public class LocationDTO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Date getReportDateTime() {
+		return reportDateTime;
+	}
+
+	public void setReportDateTime(Date reportDateTime) {
+		this.reportDateTime = reportDateTime;
 	}
 }

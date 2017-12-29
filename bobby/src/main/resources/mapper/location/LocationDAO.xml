@@ -6,7 +6,7 @@
 <mapper namespace="com.bobby.dao.location.LocationDAO">
 
 	<insert id="saveLocation" parameterType="com.bobby.dto.common.LocationDTO">
-		insert into t_location_data(ID,NICK_NAME,LATITUDE,LONGITUDE,SPEED,ALTITUDE,REPORT_TIME) 
-		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime})
+		insert into t_location_data(ID,NICK_NAME,LATITUDE,LONGITUDE,SPEED,ALTITUDE,REPORT_TIME,REPORT_DATE_TIME) 
+		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime},#{reportDateTime})
 	</insert>
 </mapper>
