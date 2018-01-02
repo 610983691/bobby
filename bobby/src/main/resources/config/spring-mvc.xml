@@ -35,7 +35,7 @@
     </mvc:annotation-driven>
    <!-- 对模型视图添加前后缀 -->
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
-      p:prefix="/jsp/" p:suffix=".jsp"/>
+      p:prefix="/jsp/" p:suffix=".html"/>
       
          
    <!--对静态资源文件的访问 ，下边resource方式会导致 正常的Controller请求获取不到-->

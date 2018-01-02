@@ -10,6 +10,7 @@ package com.bobby.dto;
 public class ExampleDTO {
 
 	private String id;
+	/** user name */
 	private String username;
 	private String password;
 	private String address;
