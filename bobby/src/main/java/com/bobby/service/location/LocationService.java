@@ -3,7 +3,10 @@
  */
 package com.bobby.service.location;
 
+import java.util.List;
+
 import com.alibaba.fastjson.JSONObject;
+import com.bobby.dto.common.LocationDTO;
 
 /**
  * 描述:
@@ -21,5 +24,23 @@ public interface LocationService {
 	 * @return String
 	 */
 	String saveUserLocation(JSONObject json);
+
+	/**
+	 * 查询今天的位置信息
+	 * 
+	 * @param locatioin
+	 * @return
+	 * @return List<LocationDTO>
+	 */
+	List<LocationDTO> queryTodayDatas(JSONObject locatioin);
+
+	/**
+	 * 查询所有的位置信息
+	 * 
+	 * @param locatioin
+	 * @return
+	 * @return List<LocationDTO>
+	 */
+	List<LocationDTO> queryHotMapDatas(JSONObject locatioin);
 
 }

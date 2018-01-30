@@ -3,9 +3,13 @@
  */
 package com.bobby.service.location;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -15,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.bobby.api.http.client.ConvertGPS2BDClient;
 import com.bobby.dao.location.LocationDAO;
 import com.bobby.dto.common.CommonResDTO;
 import com.bobby.dto.common.LocationDTO;
@@ -62,7 +67,9 @@ public class LocationServiceImpl implements LocationService {
 			Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 			location.setReportTime(now.getTime());
 			location.setNickName(reportData.getUserInfo().getNickName());
-			location.setReportDateTime(now);
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+			location.setReportDateTime(sdf.format(now));
+			ConvertGPS2BDClient.convertGPS2BDClient(location);
 			locationDao.saveLocation(location);
 		} catch (InvalidParamException ie) {
 			LOG.error("invalid location info:", ie);
@@ -91,5 +98,57 @@ public class LocationServiceImpl implements LocationService {
 			throw new InvalidParamException("参数异常：" + json);
 		}
 		return true;
+	}
+
+	/**
+	 * 方法描述:查询今天的所有位置信息
+	 * 
+	 * @param @param
+	 *            locatioin
+	 * @param @return
+	 * @throws @author
+	 *             tongjie
+	 * @date 2018年1月29日
+	 */
+	@Override
+	public List<LocationDTO> queryTodayDatas(JSONObject locatioin) {
+		List<LocationDTO> result = Collections.emptyList();
+		try {
+			LocationDTO location = JSONObject.toJavaObject(locatioin, LocationDTO.class);
+			if (StringUtils.isEmpty(location.getNickName())) {
+				return result;
+			}
+			Date now = Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+			location.setReportTime(now.getTime());
+			result = locationDao.queryLocations(location);
+		} catch (Exception e) {
+			LOG.error("查询位置信息异常", e);
+		}
+		return result;
+	}
+
+	/**
+	 * 方法描述:
+	 * 
+	 * @param @param
+	 *            locatioin
+	 * @param @return
+	 * @throws @author
+	 *             tongjie
+	 * @date 2018年1月29日
+	 */
+	@Override
+	public List<LocationDTO> queryHotMapDatas(JSONObject locatioin) {
+		List<LocationDTO> result = Collections.emptyList();
+		try {
+			LocationDTO location = JSONObject.toJavaObject(locatioin, LocationDTO.class);
+			if (StringUtils.isEmpty(location.getNickName())) {
+				return result;
+			}
+			result = locationDao.queryLocations(location);
+		} catch (Exception e) {
+			LOG.error("查询位置信息异常", e);
+		}
+		return result;
 	}
 }

@@ -3,6 +3,8 @@
  */
 package com.bobby.dao.location;
 
+import java.util.List;
+
 import com.bobby.dto.common.LocationDTO;
 
 /**
@@ -19,4 +21,8 @@ public interface LocationDAO {
 	 * @return
 	 */
 	public void saveLocation(LocationDTO location);
+
+	public List<LocationDTO> queryLocations(LocationDTO location);
+
+	public void updateLocation(LocationDTO location);
 }

@@ -4,9 +4,30 @@
 
 <!--这里的namespace就是指的你要实现的dao层接口的类路径 -->
 <mapper namespace="com.bobby.dao.location.LocationDAO">
-
+	<sql id="Base_Column_List">
+	  id as id, nick_name as nickName, latitude,longitude,bd_latitude as bdLatitude, bd_longitude as bdLongitude, 
+	  speed as speed,altitude as altitude,report_time as reportTime,DATE_FORMAT(report_date_time,'%Y-%m-%d %H:%i:%s') as reportDateTime
+	</sql>
 	<insert id="saveLocation" parameterType="com.bobby.dto.common.LocationDTO">
-		insert into t_location_data(ID,NICK_NAME,LATITUDE,LONGITUDE,SPEED,ALTITUDE,REPORT_TIME,REPORT_DATE_TIME) 
-		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime},#{reportDateTime})
+		insert into t_location_data(id,nick_name,latitude,longitude,speed,altitude,report_time,report_date_time,bd_latitude,bd_longitude) 
+		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime},#{reportDateTime},#{bdLatitude},#{bdLongitude})
 	</insert>
+	
+	<select id="queryLocations" resultType="com.bobby.dto.common.LocationDTO" parameterType="com.bobby.dto.common.LocationDTO">
+		select <include refid="Base_Column_List" />
+	    from t_location_data t
+		<where>
+		   	<if test="nickName != null">
+		   		and t.nick_name=#{nickName}
+		   	</if>
+		   	<if test="reportTime != null">
+		   		<![CDATA[and t.report_time >= #{reportTime}]]>
+			</if>
+		</where>
+		order by t.report_time desc
+	</select>
+	
+	<update id="updateLocation" parameterType="com.bobby.dto.common.LocationDTO">
+		update t_location_data set bd_latitude=#{bdLatitude},bd_longitude=#{bdLongitude} where id =#{id}
+	</update>
 </mapper>

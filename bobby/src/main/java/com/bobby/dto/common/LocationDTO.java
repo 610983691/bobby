@@ -3,8 +3,6 @@
  */
 package com.bobby.dto.common;
 
-import java.util.Date;
-
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -22,7 +20,7 @@ public class LocationDTO {
 	private Float latitude;
 
 	/** 经度 */
-	private String longitude;
+	private Float longitude;
 
 	/** 速度，单位m/s */
 	private String speed;
@@ -43,7 +41,9 @@ public class LocationDTO {
 	private Long reportTime;
 
 	/** 上报时间，日期格式 */
-	private Date reportDateTime;
+	private String reportDateTime;
+	private Double bdLongitude;
+	private Double bdLatitude;
 
 	public Float getLatitude() {
 		return latitude;
@@ -53,11 +53,11 @@ public class LocationDTO {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Float getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 
@@ -130,11 +130,27 @@ public class LocationDTO {
 		this.id = id;
 	}
 
-	public Date getReportDateTime() {
+	public String getReportDateTime() {
 		return reportDateTime;
 	}
 
-	public void setReportDateTime(Date reportDateTime) {
+	public void setReportDateTime(String reportDateTime) {
 		this.reportDateTime = reportDateTime;
+	}
+
+	public Double getBdLongitude() {
+		return bdLongitude;
+	}
+
+	public void setBdLongitude(Double bdLongitude) {
+		this.bdLongitude = bdLongitude;
+	}
+
+	public Double getBdLatitude() {
+		return bdLatitude;
+	}
+
+	public void setBdLatitude(Double bdLatitude) {
+		this.bdLatitude = bdLatitude;
 	}
 }
