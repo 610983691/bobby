@@ -145,9 +145,9 @@ public class LocationServiceImpl implements LocationService {
 			if (StringUtils.isEmpty(location.getNickName())) {
 				return result;
 			}
-			result = locationDao.queryLocations(location);
+			result = locationDao.queryHotmapLocations(location);
 		} catch (Exception e) {
-			LOG.error("查询位置信息异常", e);
+			LOG.error("查询热力图信息异常", e);
 		}
 		return result;
 	}

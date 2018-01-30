@@ -45,6 +45,8 @@ public class LocationDTO {
 	private Double bdLongitude;
 	private Double bdLatitude;
 
+	private Integer count;
+
 	public Float getLatitude() {
 		return latitude;
 	}
@@ -152,5 +154,13 @@ public class LocationDTO {
 
 	public void setBdLatitude(Double bdLatitude) {
 		this.bdLatitude = bdLatitude;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 }

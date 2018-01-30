@@ -70,7 +70,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/jsp/index.html</welcome-file>
+		<welcome-file>jsp/index.html</welcome-file>
 	</welcome-file-list>
 
 	<!-- 错误跳转页面 -->

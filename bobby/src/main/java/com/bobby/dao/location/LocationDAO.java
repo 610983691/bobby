@@ -25,4 +25,6 @@ public interface LocationDAO {
 	public List<LocationDTO> queryLocations(LocationDTO location);
 
 	public void updateLocation(LocationDTO location);
+
+	public List<LocationDTO> queryHotmapLocations(LocationDTO location);
 }

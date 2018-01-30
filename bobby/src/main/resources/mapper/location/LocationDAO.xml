@@ -5,8 +5,8 @@
 <!--这里的namespace就是指的你要实现的dao层接口的类路径 -->
 <mapper namespace="com.bobby.dao.location.LocationDAO">
 	<sql id="Base_Column_List">
-	  id as id, nick_name as nickName, latitude,longitude,bd_latitude as bdLatitude, bd_longitude as bdLongitude, 
-	  speed as speed,altitude as altitude,report_time as reportTime,DATE_FORMAT(report_date_time,'%Y-%m-%d %H:%i:%s') as reportDateTime
+	  id as id, latitude,longitude,bd_latitude as bdLatitude, bd_longitude as bdLongitude, 
+	  speed as speed,report_time as reportTime,DATE_FORMAT(report_date_time,'%Y-%m-%d %H:%i:%s') as reportDateTime
 	</sql>
 	<insert id="saveLocation" parameterType="com.bobby.dto.common.LocationDTO">
 		insert into t_location_data(id,nick_name,latitude,longitude,speed,altitude,report_time,report_date_time,bd_latitude,bd_longitude) 
@@ -30,4 +30,11 @@
 	<update id="updateLocation" parameterType="com.bobby.dto.common.LocationDTO">
 		update t_location_data set bd_latitude=#{bdLatitude},bd_longitude=#{bdLongitude} where id =#{id}
 	</update>
+	
+	<select id="queryHotmapLocations" resultType="com.bobby.dto.common.LocationDTO" parameterType="com.bobby.dto.common.LocationDTO">
+		SELECT longitude , max(bd_longitude) as bdLongitude,max(bd_latitude) as bdLatitude,count(1) as count 
+		from t_location_data 
+		where nick_name=#{nickName} GROUP BY (longitude)
+	</select>
+	
 </mapper>
