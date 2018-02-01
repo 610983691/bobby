@@ -67,7 +67,7 @@ public class LocationServiceImpl implements LocationService {
 			Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 			location.setReportTime(now.getTime());
 			location.setNickName(reportData.getUserInfo().getNickName());
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			location.setReportDateTime(sdf.format(now));
 			ConvertGPS2BDClient.convertGPS2BDClient(location);
 			locationDao.saveLocation(location);

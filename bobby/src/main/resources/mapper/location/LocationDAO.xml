@@ -10,7 +10,7 @@
 	</sql>
 	<insert id="saveLocation" parameterType="com.bobby.dto.common.LocationDTO">
 		insert into t_location_data(id,nick_name,latitude,longitude,speed,altitude,report_time,report_date_time,bd_latitude,bd_longitude) 
-		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime},#{reportDateTime},#{bdLatitude},#{bdLongitude})
+		values(#{id},#{nickName},#{latitude},#{longitude},#{speed},#{altitude},#{reportTime},STR_TO_DATE(#{reportDateTime},'%Y-%m-%d %H:%i:%s'),#{bdLatitude},#{bdLongitude})
 	</insert>
 	
 	<select id="queryLocations" resultType="com.bobby.dto.common.LocationDTO" parameterType="com.bobby.dto.common.LocationDTO">
